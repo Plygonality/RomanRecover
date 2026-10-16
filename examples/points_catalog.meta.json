@@ -1,0 +1,9 @@
+{
+  "schema_name": "romanrecoverer.table_meta",
+  "schema_version": "1.0.0",
+  "coordinate_frame": "pixel",
+  "pixel_origin": 0,
+  "axis_order": "x_is_column_y_is_row",
+  "calibration_status": "uncalibrated_amplitude",
+  "notes": "Synthetic demonstration detections. snr and anomaly_score are made-up detector columns for the adapter contract. anomaly_score is not a discovery. Unmatched rows d08 and d09 are not labelled false positives under the unspecified dataset assumption."
+}

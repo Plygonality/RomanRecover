@@ -1,0 +1,137 @@
+{
+  "adapters": {
+    "detection": "ngrst_detection",
+    "detection_ids_synthesized": false,
+    "truth": "ngrst_truth",
+    "truth_ids_synthesized": false
+  },
+  "anomaly_note": "anomaly_score is copied from the detector catalogue. RomanRecoverer does not interpret it as a discovery.",
+  "axis_order": "x_is_column_y_is_row",
+  "calibration_status": "uncalibrated_amplitude",
+  "completeness": 0.875,
+  "completeness_status": "DEFINED",
+  "confidence_intervals": {
+    "alpha": 0.05,
+    "assumptions": "Eligible injections are treated as independent Bernoulli trials. Blending, crowded photometry, and a shared detection threshold violate that assumption, so these intervals are binomial uncertainties rather than a full survey covariance. The Wilson interval is the one to quote. The percentile bootstrap resamples the observed recoveries with replacement and can collapse when every trial has the same outcome.",
+    "bootstrap": {
+      "lower": 0.625,
+      "n_bootstrap": 2000,
+      "percentile": [
+        2.5,
+        97.5
+      ],
+      "seed": 12345,
+      "upper": 1.0
+    },
+    "clopper_pearson": {
+      "lower": 0.47349032912479344,
+      "upper": 0.9968402764687481
+    },
+    "primary": "wilson",
+    "wilson": {
+      "lower": 0.5291118177871464,
+      "upper": 0.9775825085499433,
+      "z": 1.959963984540054
+    }
+  },
+  "coordinate_frame": "pixel",
+  "counts": {
+    "n_ambiguous_truth": 0,
+    "n_blended_rows": 0,
+    "n_eligible": 8,
+    "n_ineligible": 0,
+    "n_injected": 8,
+    "n_recovered": 7,
+    "n_unmatched_detected": 2,
+    "n_unmatched_truth": 1
+  },
+  "created_utc": "2026-10-16T06:18:42Z",
+  "dataset_assumption": "unspecified",
+  "eligibility": {
+    "definition": "An injection is eligible when it is unmasked and, if an image shape is known, its center lies in the closed interval [margin, n-1-margin] on both axes after converting to 0-based pixels. x is the column and y is the row.",
+    "edge_exclusion_applied": true,
+    "edge_margin_px": 0.0,
+    "image_shape": [
+      64,
+      64
+    ],
+    "pixel_origin": 0
+  },
+  "false_positive_policy": "Unmatched detections are not called false positives unless the dataset assumption is truth_complete_synthetic, or a baseline catalogue has been subtracted. A populated image can contain real sources that were never injected.",
+  "match_radius_px": 2.0,
+  "matching": {
+    "algorithm": "gated_hungarian",
+    "ineligible_sources_consume_detections": false,
+    "one_to_one": true,
+    "tie_break": "earlier detection row, then earlier eligible truth row"
+  },
+  "mode": "catalogue_only",
+  "mode_note": "Catalogue-only benchmark. No image was simulated by RomanRecoverer in this step, and no Roman instrument calibration was applied.",
+  "partition": null,
+  "photometry": {
+    "bias": null,
+    "note": "Photometric recovery bias is reported only when the injected and measured values are calibrated and in the same unit and quantity. A Gaussian peak amplitude is not an AB magnitude and is not a physical flux.",
+    "reason": "calibration_status is 'uncalibrated_amplitude', not 'calibrated'. Refusing to treat uncalibrated amplitudes as fluxes or magnitudes.",
+    "relative_amplitude": null,
+    "status": "NOT_APPLICABLE"
+  },
+  "pixel_origin": 0,
+  "position": {
+    "definition": "dx = x_detection - x_truth, dy = y_detection - y_truth, in the frame used for matching.",
+    "frame": "match_frame",
+    "mean_dx": 0.15714285714285633,
+    "mean_dy": -0.028571428571428217,
+    "mean_separation": 0.32306168982441535,
+    "median_dx": 0.1999999999999993,
+    "median_dy": 0.09999999999999964,
+    "n": 7,
+    "rms_separation": 0.34016802570830357,
+    "separation_percentiles": {
+      "p16": 0.22360679774997816,
+      "p50": 0.282842712474618,
+      "p84": 0.44932505167995807
+    },
+    "status": "DEFINED",
+    "unit": "pixel"
+  },
+  "precision": {
+    "assumption": "unspecified",
+    "false_positive_count": null,
+    "labelled_unmatched_as_false_positive": false,
+    "policy": "Unmatched detections are not called false positives unless the dataset assumption is truth_complete_synthetic, or a baseline catalogue has been subtracted. A populated image can contain real sources that were never injected.",
+    "reason": "Unmatched detections in a nonempty or unspecified background are not automatically false positives. They may be legitimate pre-existing sources. Pass --assumption truth_complete_synthetic only for a scene that contains no astrophysical sources besides the injections, or pass --baseline.",
+    "status": "NOT_APPLICABLE",
+    "value": null
+  },
+  "schema_name": "romanrecoverer.metrics",
+  "schema_version": "1.0.0",
+  "seed": null,
+  "software": {
+    "astropy": "8.0.2",
+    "galsim": null,
+    "git_revision": "b856fb0c978ca00d68b0a51775fc9edd1853a1ae",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "photutils": null,
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "pyarrow": null,
+    "python": "3.12.3",
+    "roman_datamodels": null,
+    "romanisim": null,
+    "romanrecoverer": "0.1.0",
+    "scipy": "1.18.1"
+  },
+  "strata_notes": {
+    "brightness": "Brightness bins use the amplitude column as a brightness proxy. For NGRST-style tables this is a Gaussian peak, not a magnitude.",
+    "crowd_definition": "Number of other eligible injected sources within crowd_radius of the source center, in the match frame.",
+    "crowd_radius": 5.0,
+    "local_background": "No local_background column on the truth table. A background map is not invented during a catalogue-only run. Supply the column or an image to the synthetic path, which can record an annulus median.",
+    "magnitude": "Magnitude bins are omitted because calibration_status is not 'calibrated' or no magnitude column is present. Physical magnitude bins are not invented from peak amplitudes.",
+    "snr": {
+      "reason": "Completeness is not stratified by detected SNR, because that quantity is undefined for unrecovered injections. Pass a truth SNR column to bin on an injected SNR.",
+      "status": "NOT_APPLICABLE"
+    }
+  },
+  "threshold_policy": "RomanRecoverer did not select a detection threshold. If a threshold was tuned on this same sample, the numbers are descriptive and are not an unbiased evaluation of that choice."
+}

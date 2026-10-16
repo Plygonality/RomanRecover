@@ -1,0 +1,15 @@
+stratum,bin,unit,n_eligible,n_recovered,n_unmatched_truth,completeness,status,wilson_lower,wilson_upper,clopper_pearson_lower,clopper_pearson_upper,n_ineligible,n_masked_family
+brightness_proxy_amplitude,"[1.5, 2.375)",amplitude_as_declared,2,1,1,0.5,DEFINED,0.09453120573423074,0.9054687942657693,0.01257911709342505,0.9874208829065749,,
+brightness_proxy_amplitude,"[2.375, 3.5)",amplitude_as_declared,2,2,0,1.0,DEFINED,0.34238022750665303,1.0,0.15811388300841897,1.0,,
+brightness_proxy_amplitude,"[3.5, 5.25)",amplitude_as_declared,2,2,0,1.0,DEFINED,0.34238022750665303,1.0,0.15811388300841897,1.0,,
+brightness_proxy_amplitude,"[5.25, 7]",amplitude_as_declared,2,2,0,1.0,DEFINED,0.34238022750665303,1.0,0.15811388300841897,1.0,,
+source_size_sigma,"[1, 1.175)",pixel,2,2,0,1.0,DEFINED,0.34238022750665303,1.0,0.15811388300841897,1.0,,
+source_size_sigma,"[1.175, 1.2)",pixel,0,0,0,,EMPTY_BIN,,,,,,
+source_size_sigma,"[1.2, 1.225)",pixel,4,3,1,0.75,DEFINED,0.30064184258240184,0.9544127391902995,0.19412044968324338,0.9936905367902902,,
+source_size_sigma,"[1.225, 1.4]",pixel,2,2,0,1.0,DEFINED,0.34238022750665303,1.0,0.15811388300841897,1.0,,
+crowding,"[0, 1)",count_of_other_eligible_sources,8,7,1,0.875,DEFINED,0.5291118177871464,0.9775825085499433,0.47349032912479344,0.9968402764687481,,
+crowding,"[1, 2)",count_of_other_eligible_sources,0,0,0,,EMPTY_BIN,,,,,,
+crowding,"[2, 4)",count_of_other_eligible_sources,0,0,0,,EMPTY_BIN,,,,,,
+crowding,"[4, inf]",count_of_other_eligible_sources,0,0,0,,EMPTY_BIN,,,,,,
+mask_status,ineligible,count,0,0,0,,NOT_IN_COMPLETENESS_DENOMINATOR,,,,,0.0,0.0
+mask_status,eligible,count,8,7,1,0.875,DEFINED,0.5291118177871464,0.9775825085499433,0.47349032912479344,0.9968402764687481,,

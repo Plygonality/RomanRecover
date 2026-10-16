@@ -1,0 +1,104 @@
+{
+  "created_utc": "2026-10-16T06:18:42Z",
+  "immutable_inputs": true,
+  "inputs": [
+    {
+      "bytes": 248,
+      "name": "points_truth.csv",
+      "path": "examples/points_truth.csv",
+      "role": "truth",
+      "sha256": "38b92045ed122d6d87bc2f750dcd12f8a3ce5226ad9f6f5f414c7cc73f85952b"
+    },
+    {
+      "bytes": 260,
+      "name": "points_catalog.csv",
+      "path": "examples/points_catalog.csv",
+      "role": "detections",
+      "sha256": "25c61ab4e969318aa264fe8c036d8952a66f9043216ba5e6cf40df3059e90c1a"
+    }
+  ],
+  "note": "Inputs were hashed and not modified by RomanRecoverer. Derived artifacts are listed under outputs.",
+  "outputs": [
+    {
+      "bytes": 6284,
+      "name": "metrics.json",
+      "path": "examples/outputs/points/metrics.json",
+      "role": "metrics.json",
+      "sha256": "193784dab1bdce80e8aceaa7312129b799de0c5241abee48d20f71c3fe2e2a17"
+    },
+    {
+      "bytes": 1444,
+      "name": "matches.csv",
+      "path": "examples/outputs/points/matches.csv",
+      "role": "matches.csv",
+      "sha256": "0efd5ea94435ae97767c4f361de123d7fce1547eb2f2e9a70fcd7c3fd92ca95e"
+    },
+    {
+      "bytes": 1719,
+      "name": "strata.csv",
+      "path": "examples/outputs/points/strata.csv",
+      "role": "strata.csv",
+      "sha256": "647fa2e1d581e4f91feba2bcfd259b65959d9ddab87b0671a3bb0f27215deda8"
+    },
+    {
+      "bytes": 176874,
+      "name": "report.html",
+      "path": "examples/outputs/points/report.html",
+      "role": "report.html",
+      "sha256": "3531276d25c74f1bbcae7e8a1f7c169af762c5ccd9d49b66354042bb5078ad60"
+    },
+    {
+      "bytes": 1116,
+      "name": "provenance.json",
+      "path": "examples/outputs/points/provenance.json",
+      "role": "provenance.json",
+      "sha256": "59eb1792245e2e5abe026fec82a04ec8304c05909cb64c636eabe9b67794b501"
+    },
+    {
+      "bytes": 30028,
+      "name": "completeness_brightness.png",
+      "path": "examples/outputs/points/plots/completeness_brightness.png",
+      "role": "completeness_brightness.png",
+      "sha256": "56655d5cc7762988d2a84b2974b672f7273c283ef5a0eb0ff4cf060928c79f11"
+    },
+    {
+      "bytes": 22511,
+      "name": "completeness_crowding.png",
+      "path": "examples/outputs/points/plots/completeness_crowding.png",
+      "role": "completeness_crowding.png",
+      "sha256": "ad0bed11fb181016b0d7b9691b0998c31853db1a2a46cc36ff254fbacabd856e"
+    },
+    {
+      "bytes": 44615,
+      "name": "position_residuals.png",
+      "path": "examples/outputs/points/plots/position_residuals.png",
+      "role": "position_residuals.png",
+      "sha256": "75dba781a2ecd757e8e3f0b8b39e6f9682ca9a18617d5fc2a35cd0186a7e550b"
+    },
+    {
+      "bytes": 31195,
+      "name": "associations.png",
+      "path": "examples/outputs/points/plots/associations.png",
+      "role": "associations.png",
+      "sha256": "0a95b037aa651b47788ced127fc56ddbdf90b10824c336afed8b00dc323e34ab"
+    }
+  ],
+  "schema_name": "romanrecoverer.manifest",
+  "schema_version": "1.0.0",
+  "software": {
+    "astropy": "8.0.2",
+    "galsim": null,
+    "git_revision": "b856fb0c978ca00d68b0a51775fc9edd1853a1ae",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "photutils": null,
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "pyarrow": null,
+    "python": "3.12.3",
+    "roman_datamodels": null,
+    "romanisim": null,
+    "romanrecoverer": "0.1.0",
+    "scipy": "1.18.1"
+  }
+}

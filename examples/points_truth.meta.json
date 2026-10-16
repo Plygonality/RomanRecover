@@ -1,0 +1,16 @@
+{
+  "schema_name": "romanrecoverer.table_meta",
+  "schema_version": "1.0.0",
+  "coordinate_frame": "pixel",
+  "pixel_origin": 0,
+  "axis_order": "x_is_column_y_is_row",
+  "image_shape": [64, 64],
+  "edge_margin_px": 0.0,
+  "calibration_status": "uncalibrated_amplitude",
+  "amplitude_unit": "dimensionless_peak",
+  "amplitude_meaning": "Gaussian peak amplitude in a synthetic demonstration image. Not an AB magnitude and not a calibrated flux.",
+  "sigma_unit": "pixel",
+  "dataset_assumption": "unspecified",
+  "mode": "catalogue_only",
+  "notes": "Hand-built synthetic demonstration catalogues for the RomanRecoverer software test. These are not NGRST-Discovery-Toolkit outputs and not Roman observations. Columns follow the toolkit contract: truth x,y,amplitude,sigma,class and detections x_centroid,y_centroid,snr,anomaly_score. t08 has no detection. d08 and d09 match no injection."
+}
