@@ -1,0 +1,31 @@
+schema_name = "romanrecoverer.synthetic_scene"
+schema_version = "1.0.0"
+mode = "synthetic_demonstration"
+calibration_status = "dimensionless_synthetic"
+dataset_assumption = "truth_complete_synthetic"
+seed = 7
+image_shape = [48, 48]
+background = 0.0
+noise_sigma = 0.02
+edge_margin_px = 4.0
+image_unit = "dimensionless"
+amplitude_unit = "dimensionless_peak"
+partition = "preset-controlled"
+notes = "Peak amplitude is the profile center in dimensionless image units. It is not an AB magnitude and not a Roman calibrated flux."
+
+[psf]
+kind = "gaussian"
+sigma_px = 1.1
+
+[point_sources]
+n = 10
+peak_amplitude_min = 0.8
+peak_amplitude_max = 6.0
+
+[extended_sources]
+n = 2
+profile = "exponential"
+peak_amplitude_min = 1.0
+peak_amplitude_max = 3.0
+scale_px_min = 1.5
+scale_px_max = 2.5

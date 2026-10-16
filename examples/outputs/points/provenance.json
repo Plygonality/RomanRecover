@@ -1,0 +1,40 @@
+{
+  "calibration_status": "uncalibrated_amplitude",
+  "created_utc": "2026-10-16T06:18:42Z",
+  "immutable_inputs": true,
+  "inputs": [
+    {
+      "bytes": 248,
+      "name": "points_truth.csv",
+      "path": "examples/points_truth.csv",
+      "role": "truth",
+      "sha256": "38b92045ed122d6d87bc2f750dcd12f8a3ce5226ad9f6f5f414c7cc73f85952b"
+    },
+    {
+      "bytes": 260,
+      "name": "points_catalog.csv",
+      "path": "examples/points_catalog.csv",
+      "role": "detections",
+      "sha256": "25c61ab4e969318aa264fe8c036d8952a66f9043216ba5e6cf40df3059e90c1a"
+    }
+  ],
+  "mode": "catalogue_only",
+  "schema_name": "romanrecoverer.provenance",
+  "schema_version": "1.0.0",
+  "software": {
+    "astropy": "8.0.2",
+    "galsim": null,
+    "git_revision": "b856fb0c978ca00d68b0a51775fc9edd1853a1ae",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "photutils": null,
+    "platform": "Linux-6.12.94+-x86_64-with-glibc2.39",
+    "pyarrow": null,
+    "python": "3.12.3",
+    "roman_datamodels": null,
+    "romanisim": null,
+    "romanrecoverer": "0.1.0",
+    "scipy": "1.18.1"
+  }
+}
