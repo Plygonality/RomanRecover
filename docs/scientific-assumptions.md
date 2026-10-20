@@ -15,7 +15,7 @@ A dimensionless synthetic run is never described as instrument-calibrated scienc
 
 ## What the NGRST columns are
 
-The private repository `Plygonality/NGRST-Discovery-Toolkit` was not readable here (GitHub 404 for the available credential). The adapter follows the column contract given for the current `ngrst` package:
+The adapter follows the column contract given for the current `ngrst` package:
 
 * truth: `x`, `y`, `amplitude`, `sigma`, `class`
 * detections: `x_centroid`, `y_centroid`, `snr`, `anomaly_score`, plus any further columns, which are kept out of the match

@@ -2,7 +2,7 @@
 """Offline test double used to exercise ``romanrecoverer run``.
 
 This is not a source detector, not an isolation forest, and not
-``ngrstd-discover``. It copies bright truth positions into a detection CSV
+``ngrst-discover``. It copies bright truth positions into a detection CSV
 with a fixed 0.05 pixel offset and drops sources fainter than the given peak
 threshold. Reports that use it must keep the detector name ``command``.
 """

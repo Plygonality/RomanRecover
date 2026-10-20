@@ -249,7 +249,7 @@ def command_run(args: argparse.Namespace) -> int:
     truth_before = file_record(args.truth, role="truth")
 
     detector_name = args.detector
-    if detector_name in {"ngrstd-discover", "ngrst-discover", "ngrst"}:
+    if detector_name in {"ngrst-discover", "ngrst"}:
         if args.detector_cmd:
             command = render_template(
                 args.detector_cmd,

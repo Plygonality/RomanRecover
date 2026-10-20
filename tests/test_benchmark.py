@@ -447,17 +447,16 @@ def test_strata_empty_bin_and_zero_denominator(tmp_path: Path) -> None:
 
 
 def test_ngrst_points_scene_integration() -> None:
-    """Run ``ngrstd-discover --scene points`` only when that program is installed.
+    """Run ``ngrst-discover --scene points`` only when that program is installed.
 
-    The private toolkit repository was not readable here, so this test skips
-    instead of fabricating a detection catalogue and calling it a toolkit run.
+    This test skips when the program is absent instead of fabricating a
+    detection catalogue and calling it a toolkit run.
     """
 
     probe = probe_ngrst()
     if not probe["available"] or not probe.get("executable"):
         pytest.skip(
-            "SKIPPED_DEPENDENCY: ngrst-discover is not installed and "
-            "Plygonality/NGRST-Discovery-Toolkit was not accessible (HTTP 404). "
+            "SKIPPED_DEPENDENCY: ngrst-discover is not installed. "
             "The column-contract tests still run. No --scene points metrics were measured."
         )
     help_blob = help_text(probe["executable"])

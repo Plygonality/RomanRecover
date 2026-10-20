@@ -1,19 +1,16 @@
 """Adapter for the NGRST-Discovery-Toolkit column contract and CLI.
 
-The private repository https://github.com/Plygonality/NGRST-Discovery-Toolkit
-was not readable with the credential available while this package was written
-(GitHub returned 404). The column contract implemented here is the one given
-for the current toolkit, not a guess at an older design:
+The column contract implemented here is:
 
 * synthetic truth CSV: ``x``, ``y``, ``amplitude``, ``sigma``, ``class``
-* ``ngrstd-discover`` detection CSV: ``x_centroid``, ``y_centroid``, ``snr``,
+* ``ngrst-discover`` detection CSV: ``x_centroid``, ``y_centroid``, ``snr``,
   ``anomaly_score``, plus any extra columns, which are ignored
 * a run JSON may sit beside the detection CSV and is hashed, not interpreted
 
 ``amplitude`` and ``sigma`` are the toolkit's Gaussian peak and width. They
 are not calibrated astronomical fluxes or magnitudes.
 
-This module does not implement a detector. When the ``ngrstd-discover``
+This module does not implement a detector. When the ``ngrst-discover``
 executable or the ``ngrst`` package is absent, callers receive
 ``SKIPPED_DEPENDENCY``. A command is built from the installed ``--help`` text
 only when the help text actually contains an image flag and an output flag.
@@ -38,7 +35,7 @@ SCENE_FLAGS = ("--scene",)
 
 
 def probe_ngrst() -> dict[str, Any]:
-    executable = shutil.which("ngrstd-discover") or shutil.which("ngrst-discover")
+    executable = shutil.which("ngrst-discover")
     spec = importlib.util.find_spec("ngrst")
     available = executable is not None or spec is not None
     payload: dict[str, Any] = {
@@ -49,13 +46,12 @@ def probe_ngrst() -> dict[str, Any]:
         "status": "AVAILABLE" if available else STATUS_SKIPPED,
         "inspected_repository": False,
         "repository_note": (
-            "Plygonality/NGRST-Discovery-Toolkit was not accessible (HTTP 404 for this credential). "
             "The adapter follows the documented column contract and will only invoke a local "
             "executable whose --help text exposes an explicit image and output flag."
         ),
     }
     if not available:
-        payload["reason"] = "ngrstd-discover is not on PATH and the ngrst package is not installed."
+        payload["reason"] = "ngrst-discover is not on PATH and the ngrst package is not installed."
     return payload
 
 
