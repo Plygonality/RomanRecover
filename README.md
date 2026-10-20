@@ -59,13 +59,25 @@ The NGRST integration command is:
 
 ```bash
 romanrecoverer run \
-  --image build/synthetic/image.npz \
-  --truth build/synthetic/truth.csv \
+  --image demo_scene.npz \
+  --truth demo_scene_truth.csv \
   --detector ngrst-discover \
   --out reports/pipeline
 ```
 
-Without `ngrst-discover` on `PATH` this exits `4` and does not invent a detector. If the program is installed, RomanRecoverer reads its `--help` and builds a command only when that text contains an image flag and an output flag. Otherwise pass `--detector-cmd` yourself. There is no hidden download.
+`demo_scene.npz` has to be a file `ngrst-discover` can load: a toolkit `.npz` whose science array is named `data`, or a Roman `.asdf`. The file written by `romanrecoverer synth` stores `image` and is not that input.
+
+When `ngrst-discover` is on `PATH`, RomanRecoverer reads `--help` and builds a command only if that text shows a positional `input` plus `--processed-dir` and `--candidate-dir`:
+
+```text
+ngrst-discover demo_scene.npz \
+  --processed-dir reports/pipeline/detector/processed \
+  --candidate-dir reports/pipeline/detector/candidates
+```
+
+The catalogue is then `reports/pipeline/detector/processed/demo_scene_catalog.csv`, beside `demo_scene_run.json`. Candidate PNGs are under `reports/pipeline/detector/candidates/demo_scene/`. Other toolkit flags stay at their defaults. `--scene` is not forwarded; that flag belongs to the toolkit's `make_demo.py`.
+
+Without `ngrst-discover` on `PATH`, or when `--help` does not show this interface, the command exits `4`. Pass `--detector-cmd` to supply the command yourself. There is no hidden download.
 
 ```bash
 romanrecoverer doctor --require romanisim   # exit 4 until romanisim 0.15.0 is installed
@@ -113,7 +125,7 @@ Every report states one of `catalogue_only`, `synthetic_demonstration`, `romanis
 pytest
 ```
 
-The NGRST `--scene points` integration test is skipped until `ngrst-discover` can be imported or executed. The Roman tests skip the library call in the same way. Neither skip is a mock of the instrument.
+The live `ngrst-discover` check is skipped until that program is installed. Command construction is tested with a mocked CLI. The Roman tests skip the library call in the same way. Neither skip is a mock of the instrument.
 
 ## Licence
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* `ngrst-discover` is called with a positional input, `--processed-dir`, and `--candidate-dir`. The detection catalogue is `<stem>_catalog.csv` in the processed directory, beside `<stem>_run.json`.
+
 ## 0.1.0 — 2026-10-16
 
 * Catalogue-only matching with a gated one-to-one assignment, Wilson and Clopper–Pearson intervals, and a percentile bootstrap.

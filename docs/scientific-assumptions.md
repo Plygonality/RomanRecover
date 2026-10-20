@@ -15,10 +15,12 @@ A dimensionless synthetic run is never described as instrument-calibrated scienc
 
 ## What the NGRST columns are
 
-The adapter follows the column contract given for the current `ngrst` package:
+The adapter follows the column contract of `ngrst` 0.2:
 
-* truth: `x`, `y`, `amplitude`, `sigma`, `class`
-* detections: `x_centroid`, `y_centroid`, `snr`, `anomaly_score`, plus any further columns, which are kept out of the match
+* truth, from the toolkit scene writer: `x`, `y`, `amplitude`, `sigma`, `class`
+* detections, from `<stem>_catalog.csv`: `label`, `x_centroid`, `y_centroid`, `snr`, `anomaly_score`, plus the other export columns, which stay out of the match
+
+`label` is the detection id. The run record beside that catalogue is `<stem>_run.json`.
 
 `amplitude` is a Gaussian peak in that toolkit's synthetic image. `sigma` is a Gaussian width in pixels. Neither is an AB magnitude, a maggie, or a Roman DN/s flux. `snr` is a detector signal-to-noise. `anomaly_score` is a detector statistic. RomanRecoverer copies it and does not turn it into a discovery.
 

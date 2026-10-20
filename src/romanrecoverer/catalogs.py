@@ -1,11 +1,11 @@
 """Load truth and detection catalogues and resolve column conventions.
 
-The NGRST-Discovery-Toolkit contract used here is the one stated for the
-current private package, which this environment could not read:
+The NGRST detection catalogue is ``<stem>_catalog.csv`` from ``ngrst.export``:
 
 * truth columns: ``x``, ``y``, ``amplitude``, ``sigma``, ``class``
-* detection columns: ``x_centroid``, ``y_centroid``, ``snr``, ``anomaly_score``
+* detection columns: ``label``, ``x_centroid``, ``y_centroid``, ``snr``, ``anomaly_score``
 
+``label`` is the detection id when no ``detection_id`` column is present.
 ``amplitude`` is a Gaussian peak in the toolkit's synthetic image units. It is
 not treated as an AB magnitude or a calibrated flux.
 """
@@ -148,6 +148,9 @@ def resolve_detection_columns(
 ) -> ColumnMap:
     columns = list(frame.columns)
     ngrst = {"x_centroid", "y_centroid"}.issubset(set(columns))
+    id_name = _first_present(columns, DETECTION_ID_CANDIDATES)
+    if id_name is None and ngrst and "label" in frame.columns:
+        id_name = "label"
     x_name = x_col or _first_present(columns, ("x_centroid", "x", "x_pix", "x_pixel"))
     y_name = y_col or _first_present(columns, ("y_centroid", "y", "y_pix", "y_pixel"))
     if frame.empty and (x_name is None or y_name is None):
@@ -163,7 +166,7 @@ def resolve_detection_columns(
     return ColumnMap(
         x=x_name,
         y=y_name,
-        id=_first_present(columns, DETECTION_ID_CANDIDATES),
+        id=id_name,
         ra=_first_present(columns, ("ra", "ra_deg")),
         dec=_first_present(columns, ("dec", "dec_deg")),
         amplitude=_first_present(columns, ("amplitude", "peak_amplitude", "flux_auto")),
