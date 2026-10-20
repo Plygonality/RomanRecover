@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+* `ngrst-discover` is called with a positional input, `--processed-dir`, and `--candidate-dir`. The detection catalogue is `<stem>_catalog.csv` in the processed directory, beside `<stem>_run.json`.
+
 ## 0.1.0 — 2026-10-16
 
 * Catalogue-only matching with a gated one-to-one assignment, Wilson and Clopper–Pearson intervals, and a percentile bootstrap.
@@ -8,4 +12,4 @@
 * Seeded dimensionless synthetic injection of Gaussian and exponential profiles, with an input-free preset.
 * `romanrecoverer` commands: `evaluate`, `synth`, `run`, `doctor`, `compare`.
 * Roman I-Sim 0.15.0 L2 adapter. It calls `inject_sources_into_l2` only when that version is installed and the signature matches the tagged source. Otherwise the status is `SKIPPED_DEPENDENCY`. No Gaussian fallback.
-* The private NGRST-Discovery-Toolkit repository was not readable from the environment that tagged this version, so `ngrstd-discover --scene points` was not executed.
+* `ngrst-discover --scene points` was not executed for this version.

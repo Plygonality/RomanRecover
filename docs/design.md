@@ -16,7 +16,7 @@ src/romanrecoverer/
   plots.py / reports.py  figures, HTML, metrics JSON, manifest
   provenance.py          hashes and versions
   detector_adapters/
-    ngrst.py             column contract and --help flag discovery
+    ngrst.py             column contract and verified ngrst-discover command
     subprocess_runner.py explicit command templates, no shell
     romanisim_l2.py      pinned L2 call, or SKIPPED_DEPENDENCY
   cli.py
