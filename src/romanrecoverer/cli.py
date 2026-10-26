@@ -11,7 +11,14 @@ from pathlib import Path
 from typing import Any, Sequence
 
 from romanrecoverer import __version__
-from romanrecoverer.detector_adapters.ngrst import command_from_help, help_text, probe_ngrst, require_ngrst
+from romanrecoverer.detector_adapters.ngrst import (
+    command_from_help,
+    help_text,
+    ngrst_output_paths,
+    probe_ngrst,
+    require_ngrst,
+    require_ngrst_outputs,
+)
 from romanrecoverer.detector_adapters.romanisim_l2 import probe_romanisim
 from romanrecoverer.detector_adapters.subprocess_runner import persist_run, render_template, run_detector
 from romanrecoverer.errors import DataError, DetectorError, RomanRecovererError
@@ -245,11 +252,12 @@ def command_run(args: argparse.Namespace) -> int:
     detector_dir.mkdir(parents=True, exist_ok=True)
     detections = detector_dir / "detections.csv"
     run_json = detector_dir / "run.json"
+    ngrst_paths = None
     image_before = file_record(args.image, role="image")
     truth_before = file_record(args.truth, role="truth")
 
     detector_name = args.detector
-    if detector_name in {"ngrstd-discover", "ngrst-discover", "ngrst"}:
+    if detector_name in {"ngrst-discover", "ngrst"}:
         if args.detector_cmd:
             command = render_template(
                 args.detector_cmd,
@@ -258,11 +266,14 @@ def command_run(args: argparse.Namespace) -> int:
         else:
             probe = require_ngrst()
             assert probe["executable"] is not None
+            processed_dir = detector_dir / "processed"
+            candidate_dir = detector_dir / "candidates"
+            ngrst_paths = ngrst_output_paths(args.image, processed_dir, candidate_dir)
             built = command_from_help(
                 help_text(probe["executable"]),
                 image=str(args.image),
-                detections=str(detections),
-                run_json=str(run_json),
+                processed_dir=str(processed_dir),
+                candidate_dir=str(candidate_dir),
                 scene=args.scene,
             )
             command = [probe["executable"], *built]
@@ -298,7 +309,11 @@ def command_run(args: argparse.Namespace) -> int:
             },
         )
         raise DetectorError(f"Detector exited {run.returncode}. See {detector_dir / 'stderr.txt'}.")
-    if not detections.is_file():
+    run_record = None
+    if ngrst_paths is not None:
+        run_record = require_ngrst_outputs(ngrst_paths)
+        detections = ngrst_paths.catalog
+    elif not detections.is_file():
         raise DetectorError(f"Detector exited 0 but did not write {detections}.")
 
     evaluate_args = argparse.Namespace(
@@ -331,6 +346,16 @@ def command_run(args: argparse.Namespace) -> int:
             "stderr_path": str(detector_dir / "stderr.txt"),
             "input_modified": image_before["sha256"] != image_after["sha256"]
             or truth_before["sha256"] != truth_after["sha256"],
+            **(
+                {
+                    "catalog": str(ngrst_paths.catalog),
+                    "run_json": str(ngrst_paths.run_json),
+                    "candidate_directory": str(ngrst_paths.candidate_directory),
+                    "run_record": run_record,
+                }
+                if ngrst_paths is not None and run_record is not None
+                else {}
+            ),
         },
     )
     return command_evaluate(evaluate_args)

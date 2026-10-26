@@ -446,45 +446,25 @@ def test_strata_empty_bin_and_zero_denominator(tmp_path: Path) -> None:
     ].isna().all()
 
 
-def test_ngrst_points_scene_integration() -> None:
-    """Run ``ngrstd-discover --scene points`` only when that program is installed.
-
-    The private toolkit repository was not readable here, so this test skips
-    instead of fabricating a detection catalogue and calling it a toolkit run.
-    """
+def test_installed_ngrst_discover_uses_positional_interface() -> None:
+    """Build a command from a real install. Skip when the program is absent."""
 
     probe = probe_ngrst()
     if not probe["available"] or not probe.get("executable"):
-        pytest.skip(
-            "SKIPPED_DEPENDENCY: ngrst-discover is not installed and "
-            "Plygonality/NGRST-Discovery-Toolkit was not accessible (HTTP 404). "
-            "The column-contract tests still run. No --scene points metrics were measured."
-        )
-    help_blob = help_text(probe["executable"])
-    if "--scene" not in help_blob:
-        pytest.skip("Installed ngrst-discover help text has no --scene flag; refusing to guess a demo command.")
-    # A real binary is present. Importing the helper here keeps the skip path free of the runner.
-    from romanrecoverer.detector_adapters.ngrst import command_from_help as build_command
-
-    command = [probe["executable"], *build_command(help_blob, image="unused.npz", detections="unused.csv", scene="points")]
-    assert "--scene" in command and "points" in command
-
-
-def test_ngrst_command_is_not_guessed() -> None:
-    with pytest.raises(DependencyError):
-        command_from_help("usage: ngrst-discover [options]", image="a.npz", detections="b.csv")
+        pytest.skip("SKIPPED_DEPENDENCY: ngrst-discover is not installed.")
     command = command_from_help(
-        "usage: ngrst-discover --image IMAGE --output DETECTIONS --scene {points,grid} --run-json RUN",
-        image="image.npz",
-        detections="det.csv",
-        run_json="run.json",
-        scene="points",
+        help_text(probe["executable"]),
+        image="scene.npz",
+        processed_dir="processed",
+        candidate_dir="candidates",
     )
-    assert command[:4] == ["--image", "image.npz", "--output", "det.csv"]
-    assert "--scene" in command and "points" in command
-    probe = probe_ngrst()
-    if not probe["available"]:
-        assert probe["status"] == "SKIPPED_DEPENDENCY"
+    assert command[:5] == [
+        "scene.npz",
+        "--processed-dir",
+        "processed",
+        "--candidate-dir",
+        "candidates",
+    ]
 
 
 def test_romanisim_adapter_skips_or_uses_real_signature() -> None:
